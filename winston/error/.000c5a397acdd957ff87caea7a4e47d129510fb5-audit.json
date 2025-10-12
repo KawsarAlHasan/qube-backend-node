@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "C:\\Users\\kawsa\\projects\\spark-teck\\Running\\omarfayedddd  booking app  $5000 USD\\qube-backend-1f839bb6947e9f4e7e6ed90610bcc8e4c9ac9c84\\winston\\error\\.000c5a397acdd957ff87caea7a4e47d129510fb5-audit.json",
+    "files": [
+        {
+            "date": 1759918832296,
+            "name": "C:\\Users\\kawsa\\projects\\spark-teck\\Running\\omarfayedddd  booking app  $5000 USD\\qube-backend-1f839bb6947e9f4e7e6ed90610bcc8e4c9ac9c84\\winston\\error\\08-10-2025-16-error.log",
+            "hash": "a18b61428080502f3d482950ca1ba3b26a7bfb2cc7ed395599301b2af0358afa"
+        }
+    ],
+    "hashType": "sha256"
+}

@@ -217,6 +217,66 @@ export const verifyEmailOtp = async (req: Request, res: Response) => {
   }
 };
 
+// resend verify email otp
+export const resendVerifyEmailOtp = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: "Please provide email",
+      });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    if (user.is_verified) {
+      return res.status(400).json({
+        success: false,
+        message: "User already verified",
+      });
+    }
+    const verificationCode = Math.floor(
+      100000 + Math.random() * 900000
+    ).toString();
+
+    const otpDoc: any = await Otp.findOne({ email });
+    if (otpDoc) {
+      otpDoc.otp = verificationCode;
+      otpDoc.type = "resetPassword";
+      otpDoc.otp_expired = new Date(Date.now() + 7 * 60 * 60 * 1000);
+      await otpDoc.save();
+    } else {
+      await Otp.create({
+        email,
+        otp: verificationCode,
+        type: "resetPassword",
+        otp_expired: new Date(Date.now() + 7 * 60 * 60 * 1000),
+      });
+    }
+
+    await sendVerifyEmail(user.email, verificationCode);
+
+    res.status(200).json({
+      success: true,
+      message: "Otp sent successfully",
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
+};
+
 // get user profile
 export const getProfile = async (req: Request, res: Response) => {
   try {

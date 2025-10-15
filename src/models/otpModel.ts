@@ -6,6 +6,7 @@ export interface IOtp extends Document {
   phone: string;
   otp_expired: Date;
   type: "emailVerification" | "phoneVerification" | "resetPassword";
+  isVerified: boolean;
   createdAt: Date;
 }
 
@@ -34,6 +35,10 @@ const OtpSchema = new Schema<IOtp>(
       type: String,
       enum: ["emailVerification", "phoneVerification", "resetPassword"],
       required: true,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
     },
   },
   {

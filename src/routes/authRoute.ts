@@ -3,6 +3,7 @@ import {
     deleteUser,
   emailLogin,
   getProfile,
+  resendVerifyEmailOtp,
   signUpUser,
   updatePassword,
   updateProfile,
@@ -12,10 +13,10 @@ import verifyUserToken from "../middleware/verifyUserToken";
 import { uploadImage } from "../middleware/fileUploader";
 
 const router = express.Router();
-//  hello tesign world
 router.post("/email/login", emailLogin);
 router.post("/email/signup", signUpUser);
 router.post("/email/verify", verifyEmailOtp);
+router.post("/email/resend-verify", resendVerifyEmailOtp);
 
 router.get("/profile", verifyUserToken, getProfile);
 router.put(

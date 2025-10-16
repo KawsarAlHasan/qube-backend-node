@@ -5,6 +5,7 @@ import { UserRoute } from "./userRoute";
 import { FoodCategoryRoutes } from "./restaurant/foodCategoryRoute";
 import { FoodIngredientRoutes } from "./restaurant/foodIngredientRoute";
 import { FoodRoutes } from "./restaurant/foodRoute";
+import { CartRoutes } from "./restaurant/cartRoute";
 const router = express.Router();
 
 const apiRoutes = [
@@ -31,6 +32,10 @@ const apiRoutes = [
   {
     path: "/food-ingredient",
     route: FoodIngredientRoutes,
+  },
+  {
+    path: "/cart",
+    route: CartRoutes,
   },
 ];
 

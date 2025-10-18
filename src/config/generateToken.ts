@@ -14,3 +14,17 @@ export const generateUserToken = (user: any) => {
 
   return token;
 };
+
+export const generateAdminToken = (admin: any) => {
+  const payload = {
+    id: admin?._id,
+    email: admin?.email,
+    role: admin?.role,
+  };
+
+  const token = jwt.sign(payload, config.jwt_secret as string, {
+    expiresIn: "60days",
+  });
+
+  return token;
+};

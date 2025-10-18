@@ -6,6 +6,9 @@ import { FoodCategoryRoutes } from "./restaurant/foodCategoryRoute";
 import { FoodIngredientRoutes } from "./restaurant/foodIngredientRoute";
 import { FoodRoutes } from "./restaurant/foodRoute";
 import { CartRoutes } from "./restaurant/cartRoute";
+import { SettingsRoute } from "./settingsRoute";
+import { SpaRoute } from "./spa/spaRoute";
+import { AdminRoute } from "./adminRoute";
 const router = express.Router();
 
 const apiRoutes = [
@@ -37,6 +40,18 @@ const apiRoutes = [
     path: "/cart",
     route: CartRoutes,
   },
+  {
+    path: "/settings",
+    route: SettingsRoute,
+  },
+  {
+    path: "/spa",
+    route: SpaRoute,
+  },
+  {
+    path: "/admin",
+    route: AdminRoute,
+  }
 ];
 
 apiRoutes.forEach((route) => router.use(route.path, route.route));

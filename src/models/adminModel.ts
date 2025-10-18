@@ -1,25 +1,20 @@
 import { Schema, model, Document } from "mongoose";
 import bcrypt from "bcryptjs";
 
-export interface IUser extends Document {
+export interface IAdmin extends Document {
   name: string;
   email: string;
   phone: string;
   password: string;
-  date_of_birth: Date;
-  gender: "Male" | "Female" | "Other";
   profile_image?: string;
-  is_verified: boolean;
-  address?: string;
-  role: "User" | "Driver" | "Instructor";
+  role: "Super Admin" | "Admin" | "Staff";
   status: "Active" | "Pending" | "Blocked";
   createdAt: Date;
   updatedAt: Date;
-
   comparePassword(enteredPassword: string): Promise<boolean>;
 }
 
-const UserSchema = new Schema<IUser>(
+const AdminSchema = new Schema<IAdmin>(
   {
     name: {
       type: String,
@@ -44,30 +39,15 @@ const UserSchema = new Schema<IUser>(
       minlength: 6,
       select: false,
     },
-    date_of_birth: {
-      type: Date,
-      required: true,
-    },
-    gender: {
-      type: String,
-      enum: ["Male", "Female", "Other"],
-    },
+
     profile_image: {
       type: String,
       default: "",
     },
-    is_verified: {
-      type: Boolean,
-      default: false,
-    },
-    address: {
-      type: String,
-      trim: true,
-    },
     role: {
       type: String,
-      enum: ["User", "Driver", "Instructor"],
-      default: "User",
+      enum: ["Super Admin", "Admin", "Staff"],
+      default: "Admin",
     },
     status: {
       type: String,
@@ -84,7 +64,7 @@ const UserSchema = new Schema<IUser>(
 /**
  * 🧂 Pre-save Hook: Password Hashing
  */
-UserSchema.pre<IUser>("save", async function (next) {
+AdminSchema.pre<IAdmin>("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   const salt = await bcrypt.genSalt(10);
@@ -95,10 +75,10 @@ UserSchema.pre<IUser>("save", async function (next) {
 /**
  * 🔐 Instance Method: Compare Password
  */
-UserSchema.methods.comparePassword = async function (
+AdminSchema.methods.comparePassword = async function (
   enteredPassword: string
 ): Promise<boolean> {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-export const User = model<IUser>("User", UserSchema);
+export const Admin = model<IAdmin>("Admin", AdminSchema);

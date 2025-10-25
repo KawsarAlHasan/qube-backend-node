@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 1
+    },
+    "auditLog": "C:\\Users\\kawsa\\projects\\spark-teck\\Running\\omarfayedddd  booking app  $5000 USD\\backend\\winston\\success\\.d592cc2803b50b00de800db00ce96f7f851064b5-audit.json",
+    "files": [
+        {
+            "date": 1759741968766,
+            "name": "C:\\Users\\kawsa\\projects\\spark-teck\\Running\\omarfayedddd  booking app  $5000 USD\\backend\\winston\\success\\06-10-2025-15-success.log",
+            "hash": "7167138a8c8d355122ec37bd95c90d9176107cdc4069f0e8644912c5423d7dce"
+        }
+    ],
+    "hashType": "sha256"
+}
